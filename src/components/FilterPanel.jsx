@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Search, X } from 'lucide-react';
+import React, { useState } from "react";
+import { Search, X } from "lucide-react";
 
 const FilterPanel = ({
   selectedBusNumber,
@@ -11,7 +11,7 @@ const FilterPanel = ({
   handleTrackBus,
 }) => {
   const [isOpen, setIsOpen] = useState(true);
-  const [searchRoute, setSearchRoute] = useState(''); // NEW state for search input
+  const [searchRoute, setSearchRoute] = useState(""); // NEW state for search input
 
   return (
     <>
@@ -29,7 +29,9 @@ const FilterPanel = ({
       {/* Slide-out Filter Panel */}
       <div
         className={`fixed top-20 left-15 z-40 transition-all duration-300 ${
-          isOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'
+          isOpen
+            ? "opacity-100 scale-100"
+            : "opacity-0 scale-95 pointer-events-none"
         }`}
       >
         <div className="relative bg-white rounded-2xl shadow-2xl w-80 backdrop-blur-sm border border-white/20">
@@ -46,7 +48,9 @@ const FilterPanel = ({
               <div className="w-5 h-5 bg-indigo-600 rounded flex items-center justify-center text-white text-xs">
                 🔍
               </div>
-              <h2 className="text-lg font-semibold text-gray-800">Filter Buses</h2>
+              <h2 className="text-lg font-semibold text-gray-800">
+                Filter Buses
+              </h2>
             </div>
 
             {/* Search Bar */}
@@ -63,9 +67,31 @@ const FilterPanel = ({
               />
             </div>
 
+            {/* Action Buttons */}
+            <div className="flex gap-3">
+              <button
+                onClick={() => {
+                  if (searchRoute.trim()) {
+                    toggleFilter(searchRoute); // ✅ filter by route instead of bus
+                    setSearchRoute(""); // clear input after tracking
+                    setIsOpen(false); // close panel after tracking
+                  }
+                }}
+                className="flex-1 bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-3 px-4 rounded-xl font-semibold hover:shadow-lg hover:scale-105 transition-all duration-200 flex items-center justify-center gap-2"
+              >
+                🎯 Track Bus
+              </button>
+              <button
+                onClick={clearAllFilters}
+                className="px-4 py-3 bg-black text-white rounded-xl font-medium hover:bg-gray-700 transition-colors"
+              >
+                Clear
+              </button>
+            </div>
+
             {/* Quick Filters */}
             <div className="mb-6">
-              <label className="block text-sm font-medium text-gray-700 mb-3">
+              <label className="block text-sm font-medium text-gray-700 mb-3 py-2">
                 Routes Available
               </label>
               <div className="flex flex-wrap gap-2">
@@ -75,8 +101,8 @@ const FilterPanel = ({
                     onClick={() => toggleFilter(route)}
                     className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                       activeFilters.includes(route)
-                        ? 'bg-indigo-600 text-white shadow-md transform scale-105'
-                        : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                        ? "bg-indigo-600 text-white shadow-md transform scale-105"
+                        : "bg-gray-100 text-gray-600 hover:bg-gray-200"
                     }`}
                   >
                     Route {route}
@@ -85,31 +111,12 @@ const FilterPanel = ({
               </div>
             </div>
 
-            {/* Action Buttons */}
-            <div className="flex gap-3">
-              <button
-                onClick={() => {
-                  if (searchRoute.trim()) {
-                    toggleFilter(searchRoute); // ✅ filter by route instead of bus
-                    setSearchRoute(''); // clear input after tracking
-                  }
-                }}
-                className="flex-1 bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-3 px-4 rounded-xl font-semibold hover:shadow-lg hover:scale-105 transition-all duration-200 flex items-center justify-center gap-2"
-              >
-                🎯 Track Bus
-              </button>
-              <button
-                onClick={clearAllFilters}
-                className="px-4 py-3 bg-gray-100 text-gray-600 rounded-xl font-medium hover:bg-gray-200 transition-colors"
-              >
-                Clear
-              </button>
-            </div>
-
             {/* Active Filters */}
             {activeFilters.length > 0 && (
               <div className="mt-4 pt-4 border-t border-gray-200">
-                <div className="text-sm text-gray-600 mb-2">Active filters:</div>
+                <div className="text-sm text-gray-600 mb-2">
+                  Active filters:
+                </div>
                 <div className="flex flex-wrap gap-1">
                   {activeFilters.map((filter) => (
                     <span
