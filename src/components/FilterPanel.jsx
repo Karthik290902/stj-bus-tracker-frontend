@@ -34,8 +34,9 @@ const FilterPanel = ({
             : "opacity-0 -translate-x-4 pointer-events-none"
         }`}
       >
-        <div className="relative bg-white rounded-2xl shadow-2xl w-72 sm:w-80 backdrop-blur-sm border border-white/20">
-          {/* Close button */}
+        <div className="relative bg-white rounded-2xl shadow-2xl w-72 sm:w-80 backdrop-blur-sm border border-white/20 
+                        max-h-[80vh] flex flex-col">
+          {/* Close button (fixed inside the panel) */}
           <button
             className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
             onClick={() => setIsOpen(false)}
@@ -44,7 +45,8 @@ const FilterPanel = ({
             <X className="w-5 h-5" />
           </button>
 
-          <div className="p-6 pt-4">
+          {/* Scrollable content */}
+          <div className="p-6 pt-4 overflow-y-auto">
             {/* Header */}
             <div className="flex items-center gap-2 mb-6">
               <div className="w-5 h-5 bg-indigo-600 rounded flex items-center justify-center text-white text-xs">
@@ -94,7 +96,7 @@ const FilterPanel = ({
             {/* Quick Filters */}
             <div className="mb-6 mt-6">
               <label className="block text-sm font-medium text-gray-700 mb-3">
-                Most Popular Routes 
+                Most Popular Routes
               </label>
               <div className="flex flex-wrap gap-2">
                 {popularRoutes.map((route) => (
@@ -116,7 +118,9 @@ const FilterPanel = ({
             {/* Active Filters */}
             {activeFilters.length > 0 && (
               <div className="mt-4 pt-4 border-t border-gray-200">
-                <div className="text-sm text-gray-600 mb-2">Active filters:</div>
+                <div className="text-sm text-gray-600 mb-2">
+                  Active filters:
+                </div>
                 <div className="flex flex-wrap gap-2">
                   {activeFilters.map((filter) => (
                     <span
