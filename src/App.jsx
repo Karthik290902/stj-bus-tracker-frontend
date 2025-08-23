@@ -54,7 +54,7 @@ function App() {
       </div>
       
       <StatusIndicator isLiveTracking={isLiveTracking} />
-      <FloatingActionButton />
+      {/*<FloatingActionButton />*/}
     </div>
   );
 }
