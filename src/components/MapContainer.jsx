@@ -1067,8 +1067,8 @@ const MapContainer = ({ activeFilters = [], selectedBusNumber = "" }) => {
           </div>
           <div className="flex items-center gap-2">
             <div
-              className="w-4 h-3 bg-gradient-to-r from-green-500 to-green-600 rounded border opacity-70"
-              style={{ borderColor: "#fbbf24" }}
+              className="w-4 h-3 bg-gradient-to-r from-red-500 to-red-600 rounded border opacity-70"
+              style={{ borderColor: "#0000" }}
             ></div>
             <span>Stopped Bus</span>
           </div>
