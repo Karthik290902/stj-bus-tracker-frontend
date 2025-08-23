@@ -68,7 +68,7 @@ const busAPI = {
       console.log(`[busAPI] Fetching from: ${url}`);
       
       const response = await axios.get(url, {
-        timeout: 15000, // 15 second timeout
+        timeout: 30000, // 30 second timeout
         headers: {
           'Content-Type': 'application/json'
         }
@@ -96,7 +96,7 @@ const busAPI = {
   async getRoutes() {
     try {
       const response = await axios.get(`${API_BASE_URL}/routes`, {
-        timeout: 10000,
+        timeout: 30000,
         headers: {
           'Content-Type': 'application/json'
         }
@@ -130,7 +130,7 @@ const busAPI = {
       }
       
       const response = await axios.get(url, {
-        timeout: 10000,
+        timeout: 30000,
         headers: {
           'Content-Type': 'application/json'
         }
