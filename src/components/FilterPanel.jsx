@@ -35,7 +35,7 @@ const FilterPanel = ({
         }`}
       >
         <div className="relative bg-white rounded-2xl shadow-2xl w-72 sm:w-80 backdrop-blur-sm border border-white/20 
-                        max-h-[80vh] flex flex-col">
+                        max-h-[70vh] flex flex-col">
           {/* Close button (fixed inside the panel) */}
           <button
             className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
