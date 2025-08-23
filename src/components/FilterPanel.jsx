@@ -94,7 +94,7 @@ const FilterPanel = ({
             {/* Quick Filters */}
             <div className="mb-6 mt-6">
               <label className="block text-sm font-medium text-gray-700 mb-3">
-                Routes Available
+                Most Popular Routes 
               </label>
               <div className="flex flex-wrap gap-2">
                 {popularRoutes.map((route) => (
