@@ -23,6 +23,26 @@ L.Icon.Default.mergeOptions({
   iconAnchor: [12, 12],
 });
 
+// helper: map cardinal heading → angle
+const headingToAngle = {
+  N: 0,
+  NNE: 22.5,
+  NE: 45,
+  ENE: 67.5,
+  E: 90,
+  ESE: 112.5,
+  SE: 135,
+  SSE: 157.5,
+  S: 180,
+  SSW: 202.5,
+  SW: 225,
+  WSW: 247.5,
+  W: 270,
+  WNW: 292.5,
+  NW: 315,
+  NNW: 337.5,
+};
+
 
 // create small red triangle as arrowhead
 const createArrowHead = (angle) =>
@@ -50,17 +70,13 @@ function BusMarker({ bus, routeInfo }) {
 
   const busIcon = createBusIcon(bus, busColor);
 
-  const heading = bus.hdg ?? bus.heading ?? 0;
+  const heading = headingToAngle[bus.heading] ?? 0;
   const length = 0.002; // tweak line length
   const angleRad = (heading * Math.PI) / 180;
 
-  // ✅ Proper offsets for lat/lng
-  const dLat = length * Math.cos(angleRad);
-  const dLng = (length * Math.sin(angleRad)) / Math.cos(bus.lat * Math.PI / 180);
+  const lat2 = bus.lat + length * Math.cos(angleRad);
+  const lng2 = bus.lng + length * Math.sin(angleRad);
 
-  const lat2 = bus.lat + dLat;
-  const lng2 = bus.lng + dLng;
-  
   return (
     <>
       {/* Direction arrow (behind marker) */}
