@@ -70,7 +70,7 @@ function BusMarker({ bus, routeInfo }) {
 
   const busIcon = createBusIcon(bus, busColor);
 
-  const heading = headingToAngle[bus.heading] ?? 0;
+  const heading = bus.heading ?? 0;
   const length = 0.002; // tweak line length
   const angleRad = (heading * Math.PI) / 180;
 
