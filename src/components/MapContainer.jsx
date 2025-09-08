@@ -70,7 +70,19 @@ function BusMarker({ bus, routeInfo }) {
 
   const busIcon = createBusIcon(bus, busColor);
 
-  const heading = headingToAngle[bus.heading] ?? 0;
+  // Handle both numeric angles and cardinal directions
+  let heading;
+  if (typeof bus.heading === 'number') {
+    // If heading is already a number, use it directly
+    heading = bus.heading;
+  } else if (typeof bus.heading === 'string' && !isNaN(parseFloat(bus.heading))) {
+    // If heading is a string that represents a number, parse it
+    heading = parseFloat(bus.heading);
+  } else {
+    // If heading is a cardinal direction, use the mapping (fallback)
+    heading = headingToAngle[bus.heading] ?? 0;
+  }
+
   const length = 0.002; // tweak line length
   const angleRad = (heading * Math.PI) / 180;
 
@@ -110,7 +122,7 @@ function BusMarker({ bus, routeInfo }) {
                 <strong>Speed:</strong> {bus.speed} km/h
               </div>
               <div>
-                <strong>Heading:</strong> {bus.heading}
+                <strong>Heading:</strong> {bus.heading}° {/* Show original heading with degree symbol */}
               </div>
               <div>
                 <strong>Status:</strong>{" "}
@@ -144,6 +156,7 @@ function BusMarker({ bus, routeInfo }) {
     </>
   );
 }
+
 // Custom bus icon with route color and status
 const createBusIcon = (bus, routeColor = "#10B981") => {
   return L.divIcon({
