@@ -72,15 +72,15 @@ function BusMarker({ bus, routeInfo }) {
 
   // Handle both numeric angles and cardinal directions
   let heading;
-  if (typeof bus.heading === 'number') {
+  if (typeof bus.direction === 'number') {
     // If heading is already a number, use it directly
-    heading = bus.heading;
-  } else if (typeof bus.heading === 'string' && !isNaN(parseFloat(bus.heading))) {
+    heading = bus.direction;
+  } else if (typeof bus.direction === 'string' && !isNaN(parseFloat(bus.direction))) {
     // If heading is a string that represents a number, parse it
-    heading = parseFloat(bus.heading);
+    heading = parseFloat(bus.direction);
   } else {
     // If heading is a cardinal direction, use the mapping (fallback)
-    heading = headingToAngle[bus.heading] ?? 0;
+    heading = headingToAngle[bus.direction] ?? 0;
   }
 
   const length = 0.002; // tweak line length
@@ -122,7 +122,7 @@ function BusMarker({ bus, routeInfo }) {
                 <strong>Speed:</strong> {bus.speed} km/h
               </div>
               <div>
-                <strong>Heading:</strong> {bus.heading}° {/* Show original heading with degree symbol */}
+                <strong>Heading:</strong> {bus.direction}° {/* Show original heading with degree symbol */}
               </div>
               <div>
                 <strong>Status:</strong>{" "}
@@ -773,7 +773,7 @@ const MapContainer = ({ activeFilters = [], selectedBusNumber = "" }) => {
                 route_number: bus.routenumber || bus.route || "Unknown",
                 lat: parseFloat(bus.bus_lat || bus.lat),
                 lng: parseFloat(bus.bus_lon || bus.lng),
-                heading: bus.heading || "Unknown",
+                heading: bus.direction || "Unknown",
                 speed: parseFloat(bus.speed) || 0,
                 timestamp: bus.timestamp || new Date().toISOString(),
                 current_location: bus.current_location,
@@ -788,7 +788,7 @@ const MapContainer = ({ activeFilters = [], selectedBusNumber = "" }) => {
                 route_number: bus.route || bus.routenumber || "Unknown",
                 lat: parseFloat(bus.lat || bus.bus_lat),
                 lng: parseFloat(bus.lng || bus.bus_lon),
-                heading: bus.hdg || bus.heading || "Unknown",
+                heading: bus.hdg || bus.direction || "Unknown",
                 speed: parseFloat(bus.spd || bus.speed) || 0,
                 timestamp: bus.timestamp || new Date().toISOString(),
               };
@@ -800,7 +800,7 @@ const MapContainer = ({ activeFilters = [], selectedBusNumber = "" }) => {
                 route_number: bus.route_number || "Unknown",
                 lat: parseFloat(bus.latitude),
                 lng: parseFloat(bus.longitude),
-                heading: bus.heading || "Unknown",
+                heading: bus.direction || "Unknown",
                 speed: parseFloat(bus.speed) || 0,
                 timestamp: bus.timestamp || new Date().toISOString(),
                 current_location: bus.current_location,
